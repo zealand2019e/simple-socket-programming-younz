@@ -25,7 +25,10 @@ namespace EchoServer
             StreamWriter sw = new StreamWriter(ns);
             sw.AutoFlush = true;
             string line = sr.ReadLine();
-
+            if (line !=null)
+            {
+                sw.WriteLine(line.ToUpper());
+            }
             
 
 
