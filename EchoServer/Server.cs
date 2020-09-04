@@ -8,7 +8,7 @@ using System.Net.Sockets;
 
 namespace EchoServer
 {
-   public static class Sever
+   public static class Server
     {
         public static void Start()
         {
@@ -23,6 +23,11 @@ namespace EchoServer
             Stream ns = connectionSocket.GetStream();
             StreamReader sr = new StreamReader(ns);
             StreamWriter sw = new StreamWriter(ns);
+            sw.AutoFlush = true;
+            string line = sr.ReadLine();
+
+            
+
 
         }
     }
