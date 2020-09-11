@@ -12,7 +12,7 @@ namespace EchoServer
     {
         public static void Start()
         {
-            TcpListener socketServer = new TcpListener(IPAddress.Loopback, port: 7777); // forbundet med port 7777
+            TcpListener socketServer = new TcpListener(IPAddress.Any, port: 7777); // forbundet med port 7777
             
             socketServer.Start();
             // start sever
@@ -20,18 +20,30 @@ namespace EchoServer
             // accept client
             TcpClient connectionSocket = socketServer.AcceptTcpClient();
             Console.WriteLine("server activated");
+            DoClient(connectionSocket);
+
+            connectionSocket.Close();
+            socketServer.Stop();
+            
+            
+            
+            
+
+
+
+        }
+
+        private static void DoClient(TcpClient connectionSocket)
+        {
             Stream ns = connectionSocket.GetStream();
             StreamReader sr = new StreamReader(ns);
             StreamWriter sw = new StreamWriter(ns);
             sw.AutoFlush = true;
             string line = sr.ReadLine();
-            if (line !=null)
+            if (line != null)
             {
                 sw.WriteLine(line.ToUpper());
             }
-            
-
-
         }
     }
 }
